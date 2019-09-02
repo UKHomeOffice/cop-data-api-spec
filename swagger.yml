@@ -1,0 +1,317 @@
+openapi: 3.0.0
+
+info:
+  title: COP Data API
+  description: |
+    The API specification for the COP Data API being developed by the UK Home Office.
+    This API specification uses the [OpenAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) standard.
+  version: "1.0.0"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+
+# Added by API Auto Mocking Plugin
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/Viable-Data/COP-Data-API/1.0.0
+
+tags:
+- name: "entity"
+  description: "Entities are the collection of reference data tables"
+
+paths:
+  /v1/{entity}:
+    get:
+      tags:
+        - entity
+      summary: GET all data for an entity.
+      description: |
+        Get all data for an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be queried.
+          required: true
+          example: country
+        - in: query
+          name: select
+          schema:
+            type: string
+          description: |
+            The columns required, if not passed it defaults to all columns.
+
+            Supports single `select`, example:
+
+              - /<entity_name>?select=name
+
+            Supports multiple `select`, example:
+
+              - /<entity_name>?select=name,age
+        - in: query
+          schema:
+            type: string
+          description: |
+            Supports single `eq` (equal) filtering, example:
+
+                - /<entity_name>?id=eq.3
+                - /<entity_name>?city=eq.London
+                - /<entity_name>?email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /<entity_name>?firstname=eq.Pedro&lastname=eq.Miguel
+                - /<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /<entity_name>?name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /<entity_name>?continent=neq.AS&continent=eq.EU
+                - /<entity_name>?continent=neq.AS&continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /<entity_name>?name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /<entity_name>?age=gte.25
+                - /<entity_name>?age=lte.30
+                - /<entity_name>?age=gte.25,&age=lte.30
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+    post:
+      tags:
+        - entity
+      summary: POST new data for an entity.
+      description: |
+        POST new data for an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity the item is to be added to.
+          required: true
+          example: staff
+      requestBody:
+        description: The data to be used to create the new item.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+              example: [
+                { 'name': 'John', 'age': 34, 'email': 'john@mail.com', 'dateofbirth': null },
+                { 'name': 'Rachel', 'age': 32, 'email': 'rachel@mail.com', 'dateofbirth': null },
+              ]
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    dateofbirth:
+                      type: datetime
+                      example: null
+                    firstname:
+                      type: string
+                      example: "John"
+                    age:
+                      type: integer
+                      example: 34
+                    email:
+                      type: string
+                      example: "john@mail.com"
+  /v1/{entity}/{id}
+    patch:
+      tags:
+        - entity
+      summary: PATCH existing data in an entity.
+      description: |
+        PATCH existing data in an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be patched.
+          required: true
+          example: staff
+        - in: path
+          name: id
+          schema:
+            type: string
+          description: The id of the item to be patched.
+          required: false
+          example: 1
+        - in: query
+          schema:
+            type: string
+          description: |
+            Supports single `eq` (equal) filtering, example:
+
+                - /<entity_name>?id=eq.3
+                - /<entity_name>?city=eq.London
+                - /<entity_name>?email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /<entity_name>?firstname=eq.Pedro&lastname=eq.MIguel
+                - /<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /<entity_name>?name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /<entity_name>?continent=neq.AS&continent=eq.EU
+                - /<entity_name>?continent=neq.AS&continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /<entity_name>?name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /<entity_name>?age=gte.25
+                - /<entity_name>?age=lte.30
+                - /<entity_name>?age=gte.25,&age=lte.30
+      requestBody:
+        description: The data to be used to patch/update the existing item.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+              example: {
+                "email": "rachel@mail.com"
+              }
+      responses:
+        200:
+          description: |
+            Returns either `{}` or an array with all objects patched.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties: {}
+                    example: [
+                      {
+                        'dateofbirth': null,
+                        'firstname': "Rachel",
+                        'age': 34,
+                        'email': "rachel@mail.com"
+                      }
+                    ]
+  /v2/{entity}:
+    get:
+      tags:
+        - entity
+      summary: GET all data for an entity.
+      description: |
+        Get all data for an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be queried.
+          required: true
+          example: country
+        - in: query
+          name: select
+          schema:
+            type: string
+          description: |
+            The columns required, if not passed it defaults to all columns.
+
+            Supports single `select`, example:
+
+              - /<entity_name>?select=name
+
+            Supports multiple `select`, example:
+
+              - /<entity_name>?select=name,age
+        - in: query
+          name: filter
+          schema:
+            type: string
+          description: |
+            Supports single `eq` (equal) filtering, example:
+
+                - /<entity_name>?filter=id=eq.3
+                - /<entity_name>?filter=city=eq.London
+                - /<entity_name>?filter=email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /<entity_name>?filter=firstname=eq.Pedro&filter=lastname=eq.Miguel
+                - /<entity_name>?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /<entity_name>?filter=name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
+                - /<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /<entity_name>?filter=name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /<entity_name>?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00,&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /<entity_name>?filter=age=gte.25
+                - /<entity_name>?filter=age=lte.30
+                - /<entity_name>?filter=age=gte.25,&filter=age=lte.30
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
