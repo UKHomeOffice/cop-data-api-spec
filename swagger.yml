@@ -146,7 +146,7 @@ paths:
                     email:
                       type: string
                       example: "john@mail.com"
-  /v1/{entity}/{id}
+  /v1/{entity}/{id}:
     patch:
       tags:
         - entity
