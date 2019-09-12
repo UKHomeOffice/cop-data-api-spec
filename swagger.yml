@@ -291,21 +291,14 @@ paths:
                 - /<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
                 - /<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
 
-            Supports single `in` (in list) filtering, example:
+            Supports `sort` (sorting) of columns ascending and descending, example:
 
-                - /<entity_name>?filter=name=in.(Portugal, United Kingdom)
+                - /<entity_name>?sort=name.asc
+                - /<entity_name>?filter=age=eq.34&sort=name.desc
 
-            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+            Supports `limit` of rows being returned, example:
 
-                - /<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /<entity_name>?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00,&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
-
-            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
-
-                - /<entity_name>?filter=age=gte.25
-                - /<entity_name>?filter=age=lte.30
-                - /<entity_name>?filter=age=gte.25,&filter=age=lte.30
+                - /<entity_name>?filter=surname=eq.Smith&limit=5
       responses:
         200:
           description: OK
