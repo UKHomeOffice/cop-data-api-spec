@@ -11,4 +11,4 @@ spec:
     port: 443
     targetPort: 10443
   selector:
-    name: cop-data-api-spec-spec
+    name: cop-data-api-spec
