@@ -68,11 +68,6 @@ paths:
 
                 - /<entity_name>?name=eq.null
 
-            Supports single and multiple `neq` (not equal) filtering, example:
-
-                - /<entity_name>?continent=neq.AS&continent=eq.EU
-                - /<entity_name>?continent=neq.AS&continent=neq.EU
-
             Supports single `in` (in list) filtering, example:
 
                 - /<entity_name>?name=in.(Portugal, United Kingdom)
@@ -186,11 +181,6 @@ paths:
             Supports `eq` (equal) filtering of NULL values, example:
 
                 - /<entity_name>?name=eq.null
-
-            Supports single and multiple `neq` (not equal) filtering, example:
-
-                - /<entity_name>?continent=neq.AS&continent=eq.EU
-                - /<entity_name>?continent=neq.AS&continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
