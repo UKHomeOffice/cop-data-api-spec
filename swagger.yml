@@ -42,13 +42,11 @@ paths:
           description: |
             The columns required, if not passed it defaults to all columns.
 
-            Supports single `select`, example:
+            Supports single and multiple `select`, example:
 
-              - /v1/<entity_name>?select=name
+                - /v1/<entity_name>?select=name
+                - /v1/<entity_name>?select=name,age
 
-            Supports multiple `select`, example:
-
-              - /v1/<entity_name>?select=name,age
         - in: query
           schema:
             type: string
@@ -67,6 +65,11 @@ paths:
             Supports `eq` (equal) filtering of NULL values, example:
 
                 - /v1/<entity_name>?name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
+                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
@@ -182,6 +185,11 @@ paths:
 
                 - /v1/<entity_name>?name=eq.null
 
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
+                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
+
             Supports single `in` (in list) filtering, example:
 
                 - /v1/<entity_name>?name=in.(Portugal, United Kingdom)
@@ -289,6 +297,12 @@ paths:
             Supports `limit` of rows being returned, example:
 
                 - /v2/<entity_name>?filter=surname=eq.Smith&limit=5
+
+            Supports single in (in list) filtering, example:
+
+                - /v2/<entity_name>?filter=name=in.(Portugal, United Kingdom)
+                - /v2/<entity_name>?filter=continent=eq.Europe&filter=name=in.(Portugal, United Kingdom)
+
       responses:
         200:
           description: OK
