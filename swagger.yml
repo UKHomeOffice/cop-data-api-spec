@@ -44,11 +44,11 @@ paths:
 
             Supports single `select`, example:
 
-              - /v1/<entity_name>?select=name
+                - /v1/<entity_name>?select=name
 
             Supports multiple `select`, example:
 
-              - /v1/<entity_name>?select=name,age
+                - /v1/<entity_name>?select=name,age
         - in: query
           schema:
             type: string
