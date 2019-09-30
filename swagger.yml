@@ -42,13 +42,11 @@ paths:
           description: |
             The columns required, if not passed it defaults to all columns.
 
-            Supports single `select`, example:
+            Supports single and multiple `select`, example:
 
                 - /v1/<entity_name>?select=name
-
-            Supports multiple `select`, example:
-
                 - /v1/<entity_name>?select=name,age
+
         - in: query
           schema:
             type: string
