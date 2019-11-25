@@ -144,6 +144,71 @@ paths:
                     email:
                       type: string
                       example: "john@mail.com"
+    delete:
+      tags:
+        - entity
+      summary: DELETE existing data in an entity.
+      description: |
+        DELETE existing data in an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be deleted.
+          required: true
+          example: country
+        - in: query
+          schema:
+            type: string
+          description: |
+            If no filters are passed, it defaults to all columns.
+
+            Supports single `eq` (equal) filtering, example:
+
+                - /v1/<entity_name>?id=eq.3
+                - /v1/<entity_name>?city=eq.London
+                - /v1/<entity_name>?email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /v1/<entity_name>?firstname=eq.Pedro&lastname=eq.Miguel
+                - /v1/<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /v1/<entity_name>?name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
+                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /v1/<entity_name>?name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v1/<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /v1/<entity_name>?age=gte.25
+                - /v1/<entity_name>?age=lte.30
+                - /v1/<entity_name>?age=gte.25,&age=lte.30
+
+      responses:
+        200:
+          description: OK
+          content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
   /v1/{entity}/{id}:
     patch:
       tags:
@@ -235,6 +300,7 @@ paths:
                         'email': "rachel@mail.com"
                       }
                     ]
+
   /v2/{entity}:
     get:
       tags:
@@ -312,3 +378,68 @@ paths:
                 type: array
                 items:
                   type: object
+    delete:
+      tags:
+        - entity
+      summary: DELETE existing data in an entity.
+      description: |
+        DELETE existing data in an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be deleted.
+          required: true
+          example: country
+        - in: query
+          schema:
+            type: string
+          description: |
+            If no filters are passed, it defaults to all columns.
+
+            Supports single `eq` (equal) filtering, example:
+
+                - /v2/<entity_name>?filter=id=eq.3
+                - /v2/<entity_name>?filter=city=eq.London
+                - /v2/<entity_name>?filter=email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /v2/<entity_name>?filter=firstname=eq.Pedro&filter=lastname=eq.Miguel
+                - /v2/<entity_name>?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /v2/<entity_name>?filter=name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
+                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /v2/<entity_name>?filter=name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v2/<entity_name>?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /v2/<entity_name>?filter=age=gte.25
+                - /v2/<entity_name>?filter=age=lte.30
+                - /v2/<entity_name>?filter=age=gte.25&filter=age=lte.30
+
+      responses:
+        200:
+          description: OK
+          content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
