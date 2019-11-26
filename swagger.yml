@@ -41,51 +41,58 @@ paths:
             type: string
           description: |
             The columns required, if not passed it defaults to all columns.
+            Example:
 
-            Supports single and multiple `select`, example:
+                - /v1/<entity_name>?select=<field>
 
-                - /v1/<entity_name>?select=name
-                - /v1/<entity_name>?select=name,age
+            Supports single and multiple `select`, example
+
+                - /v1/country?select=name
+                - /v1/country?select=name,continent
 
         - in: query
           schema:
             type: string
           description: |
+            Example:
+
+                - /v1/<entity_name>?<field>=<filter>
+
             Supports single `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?id=eq.3
-                - /v1/<entity_name>?city=eq.London
-                - /v1/<entity_name>?email=eq.john@mail.com
+                - /v1/staff?id=eq.3
+                - /v1/staff?city=eq.London
+                - /v1/staff?email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?firstname=eq.Pedro&lastname=eq.Miguel
-                - /v1/<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+                - /v1/staff?firstname=eq.Yuri&lastname=eq.Gagarin
+                - /v1/staff?city=eq.London&postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v1/<entity_name>?name=eq.null
+                - /v1/staff?name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
-                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
+                - /v1/country?continent=neq.AS&continent=eq.EU
+                - /v1/country?continent=neq.AS&continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
-                - /v1/<entity_name>?name=in.(Portugal, United Kingdom)
+                - /v1/country?name=in.(Portugal, United Kingdom)
 
             Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
 
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
 
             Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
 
-                - /v1/<entity_name>?age=gte.25
-                - /v1/<entity_name>?age=lte.30
-                - /v1/<entity_name>?age=gte.25,&age=lte.30
+                - /v1/staff?age=gte.25
+                - /v1/staff?age=lte.30
+                - /v1/staff?age=gte.25,&age=lte.30
       responses:
         200:
           description: OK
@@ -163,42 +170,45 @@ paths:
             type: string
           description: |
             If no filters are passed, it defaults to all columns.
+            Example:
+
+                - /v1/<entity_name>?<field>=<filter>
 
             Supports single `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?id=eq.3
-                - /v1/<entity_name>?city=eq.London
-                - /v1/<entity_name>?email=eq.john@mail.com
+                - /v1/staff?id=eq.3
+                - /v1/staff?city=eq.London
+                - /v1/staff?email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?firstname=eq.Pedro&lastname=eq.Miguel
-                - /v1/<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+                - /v1/staff?firstname=eq.Yuri&lastname=eq.Gagarin
+                - /v1/staff?city=eq.London&postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v1/<entity_name>?name=eq.null
+                - /v1/staff?name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
-                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
+                - /v1/country?continent=neq.AS&continent=eq.EU
+                - /v1/country?continent=neq.AS&continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
-                - /v1/<entity_name>?name=in.(Portugal, United Kingdom)
+                - /v1/country?name=in.(Portugal, United Kingdom)
 
             Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
 
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
 
             Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
 
-                - /v1/<entity_name>?age=gte.25
-                - /v1/<entity_name>?age=lte.30
-                - /v1/<entity_name>?age=gte.25,&age=lte.30
+                - /v1/staff?age=gte.25
+                - /v1/staff?age=lte.30
+                - /v1/staff?age=gte.25,&age=lte.30
 
       responses:
         200:
@@ -235,41 +245,45 @@ paths:
           schema:
             type: string
           description: |
+            Example:
+
+                - /v1/<entity_name>?<field>=<filter>
+
             Supports single `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?id=eq.3
-                - /v1/<entity_name>?city=eq.London
-                - /v1/<entity_name>?email=eq.john@mail.com
+                - /v1/staff?id=eq.3
+                - /v1/staff?city=eq.London
+                - /v1/staff?email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v1/<entity_name>?firstname=eq.Pedro&lastname=eq.MIguel
-                - /v1/<entity_name>?city=eq.London&postcode=eq.SW13 9RQ
+                - /v1/staff?firstname=eq.Yuri&lastname=eq.Gagarin
+                - /v1/staff?city=eq.London&postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v1/<entity_name>?name=eq.null
+                - /v1/country?name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v1/<entity_name>?continent=neq.AS&continent=eq.EU
-                - /v1/<entity_name>?continent=neq.AS&continent=neq.EU
+                - /v1/country?continent=neq.AS&continent=eq.EU
+                - /v1/country?continent=neq.AS&continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
-                - /v1/<entity_name>?name=in.(Portugal, United Kingdom)
+                - /v1/country?name=in.(Portugal, United Kingdom)
 
             Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
 
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /v1/<entity_name>?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v1/team?shiftstartdatetime=gt.2019-06-20T12:00:00,&shiftstartdatetime=lt.2019-06-22T12:00:00
 
             Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
 
-                - /v1/<entity_name>?age=gte.25
-                - /v1/<entity_name>?age=lte.30
-                - /v1/<entity_name>?age=gte.25,&age=lte.30
+                - /v1/staff?age=gte.25
+                - /v1/staff?age=lte.30
+                - /v1/staff?age=gte.25,&age=lte.30
       requestBody:
         description: The data to be used to patch/update the existing item.
         required: true
@@ -322,52 +336,57 @@ paths:
             type: string
           description: |
             The columns required, if not passed it defaults to all columns.
+            Example:
 
-            Supports single `select`, example:
+                - /v1/<entity_name>?select=<field>
 
-              - /v2/<entity_name>?select=name
+            Supports single and multiple `select`, example:
 
-            Supports multiple `select`, example:
+              - /v2/staff?select=name
+              - /v2/staff?select=name,age
 
-              - /v2/<entity_name>?select=name,age
         - in: query
           name: filter
           schema:
             type: string
           description: |
+            Example:
+
+                - /v1/<entity_name>?filter=<filter>
+
             Supports single `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=id=eq.3
-                - /v2/<entity_name>?filter=city=eq.London
-                - /v2/<entity_name>?filter=email=eq.john@mail.com
+                - /v2/staff?filter=id=eq.3
+                - /v2/staff?filter=city=eq.London
+                - /v2/staff?filter=email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=firstname=eq.Pedro&filter=lastname=eq.Miguel
-                - /v2/<entity_name>?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+                - /v2/staff?filter=firstname=eq.Yuri&filter=lastname=eq.Gagarin
+                - /v2/staff?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v2/<entity_name>?filter=name=eq.null
+                - /v2/staff?filter=name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
+                - /v2/country?filter=continent=neq.AS&filter=continent=eq.EU
+                - /v2/country?filter=continent=neq.AS&filter=continent=neq.EU
 
             Supports `sort` (sorting) of columns ascending and descending, example:
 
-                - /v2/<entity_name>?sort=name.asc
-                - /v2/<entity_name>?filter=age=eq.34&sort=name.desc
+                - /v2/staff?sort=name.asc
+                - /v2/staff?filter=age=eq.34&sort=name.desc
 
             Supports `limit` of rows being returned, example:
 
-                - /v2/<entity_name>?filter=surname=eq.Smith&limit=5
+                - /v2/staff?filter=surname=eq.Smith&limit=5
 
             Supports single in (in list) filtering, example:
 
-                - /v2/<entity_name>?filter=name=in.(Portugal, United Kingdom)
-                - /v2/<entity_name>?filter=continent=eq.Europe&filter=name=in.(Portugal, United Kingdom)
+                - /v2/country?filter=name=in.(Portugal, United Kingdom)
+                - /v2/country?filter=continent=eq.Europe&filter=name=in.(Portugal, United Kingdom)
 
       responses:
         200:
@@ -397,42 +416,45 @@ paths:
             type: string
           description: |
             If no filters are passed, it defaults to all columns.
+            Example:
+
+                - /v1/<entity_name>?filter=<filter>
 
             Supports single `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=id=eq.3
-                - /v2/<entity_name>?filter=city=eq.London
-                - /v2/<entity_name>?filter=email=eq.john@mail.com
+                - /v2/staff?filter=id=eq.3
+                - /v2/staff?filter=city=eq.London
+                - /v2/staff?filter=email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=firstname=eq.Pedro&filter=lastname=eq.Miguel
-                - /v2/<entity_name>?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+                - /v2/staff?filter=firstname=eq.Yuri&filter=lastname=eq.Gagarin
+                - /v2/staff?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v2/<entity_name>?filter=name=eq.null
+                - /v2/coutry?filter=name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
+                - /v2/coutry?filter=continent=neq.AS&filter=continent=eq.EU
+                - /v2/coutry?filter=continent=neq.AS&filter=continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
-                - /v2/<entity_name>?filter=name=in.(Portugal, United Kingdom)
+                - /v2/coutry?filter=name=in.(Portugal, United Kingdom)
 
             Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
 
-                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /v2/<entity_name>?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
 
             Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
 
-                - /v2/<entity_name>?filter=age=gte.25
-                - /v2/<entity_name>?filter=age=lte.30
-                - /v2/<entity_name>?filter=age=gte.25&filter=age=lte.30
+                - /v2/staff?filter=age=gte.25
+                - /v2/staff?filter=age=lte.30
+                - /v2/staff?filter=age=gte.25&filter=age=lte.30
 
       responses:
         200:
