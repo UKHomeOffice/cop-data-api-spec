@@ -491,41 +491,45 @@ paths:
           schema:
             type: string
           description: |
+            Example:
+
+                - /v2/<entity_name>?filter=<filter>
+
             Supports single `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=id=eq.3
-                - /v2/<entity_name>?filter=city=eq.London
-                - /v2/<entity_name>?filter=email=eq.john@mail.com
+                - /v2/staff?filter=id=eq.3
+                - /v2/staff?filter=city=eq.London
+                - /v2/staff?filter=email=eq.john@mail.com
 
             Supports multiple `eq` (equal) filtering, example:
 
-                - /v2/<entity_name>?filter=firstname=eq.Pedro&filter=lastname=eq.MIguel
-                - /v2/<entity_name>?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+                - /v2/staff?filter=firstname=eq.Yuri&filter=lastname=eq.Gagarin
+                - /v2/staff?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
 
             Supports `eq` (equal) filtering of NULL values, example:
 
-                - /v2/<entity_name>?filter=name=eq.null
+                - /v2/country?filter=name=eq.null
 
             Supports single and multiple `neq` (not equal) filtering, example:
 
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=eq.EU
-                - /v2/<entity_name>?filter=continent=neq.AS&filter=continent=neq.EU
+                - /v2/country?filter=continent=neq.AS&filter=continent=eq.EU
+                - /v2/country?filter=continent=neq.AS&filter=continent=neq.EU
 
             Supports single `in` (in list) filtering, example:
 
-                - /v2/<entity_name>?filter=name=in.(Portugal, United Kingdom)
+                - /v2/country?filter=name=in.(Portugal, United Kingdom)
 
             Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
 
-                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
-                - /v2/<entity_name>?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
-                - /v2/<entity_name>?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
 
             Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
 
-                - /v2/<entity_name>?filter=age=gte.25
-                - /v2/<entity_name>?filter=age=lte.30
-                - /v2/<entity_name>?filter=age=gte.25&filter=age=lte.30
+                - /v2/staff?filter=age=gte.25
+                - /v2/staff?filter=age=lte.30
+                - /v2/staff?filter=age=gte.25&filter=age=lte.30
       requestBody:
         description: The data to be used to patch/update the existing item.
         required: true
