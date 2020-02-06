@@ -4,7 +4,7 @@
 
 ## Developing the API specification
 
-This project uses the [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) standard to document the Reference Data Service API.
+This project uses the [OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) standard to document the Operational Data Service API.
 
 This swagger documentation can be found at:
 https://data-api-spec.dev.cop.homeoffice.gov.uk/
