@@ -238,7 +238,7 @@ paths:
           name: id
           schema:
             type: string
-          description: The id of the item to be patched.
+          description: The id of the item to be patched (optional).
           required: false
           example: 1
         - in: query
@@ -465,3 +465,98 @@ paths:
                   type: array
                   items:
                     type: object
+  /v2/{entity}/{id}:
+    patch:
+      tags:
+        - entity
+      summary: PATCH existing data in an entity.
+      description: |
+        PATCH existing data in an entity.
+      parameters:
+        - in: path
+          name: entity
+          schema:
+            type: string
+          description: The name of the entity to be patched.
+          required: true
+          example: staff
+        - in: path
+          name: id
+          schema:
+            type: string
+          description: The id of the item to be patched (optional).
+          required: false
+          example: 1
+        - in: query
+          schema:
+            type: string
+          description: |
+            Example:
+
+                - /v2/<entity_name>?filter=<filter>
+
+            Supports single `eq` (equal) filtering, example:
+
+                - /v2/staff?filter=id=eq.3
+                - /v2/staff?filter=city=eq.London
+                - /v2/staff?filter=email=eq.john@mail.com
+
+            Supports multiple `eq` (equal) filtering, example:
+
+                - /v2/staff?filter=firstname=eq.Yuri&filter=lastname=eq.Gagarin
+                - /v2/staff?filter=city=eq.London&filter=postcode=eq.SW13 9RQ
+
+            Supports `eq` (equal) filtering of NULL values, example:
+
+                - /v2/country?filter=name=eq.null
+
+            Supports single and multiple `neq` (not equal) filtering, example:
+
+                - /v2/country?filter=continent=neq.AS&filter=continent=eq.EU
+                - /v2/country?filter=continent=neq.AS&filter=continent=neq.EU
+
+            Supports single `in` (in list) filtering, example:
+
+                - /v2/country?filter=name=in.(Portugal, United Kingdom)
+
+            Supports single and multiple `gt` (greater than), `lt` (less than) filtering, example:
+
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=lt.2019-06-20T12:00:00
+                - /v2/team?filter=shiftstartdatetime=gt.2019-06-20T12:00:00&filter=shiftstartdatetime=lt.2019-06-22T12:00:00
+
+            Supports single and multiple `gte` (greater than or equal), `lte` (less than or equal) filtering, example:
+
+                - /v2/staff?filter=age=gte.25
+                - /v2/staff?filter=age=lte.30
+                - /v2/staff?filter=age=gte.25&filter=age=lte.30
+      requestBody:
+        description: The data to be used to patch/update the existing item.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+              example: {
+                "email": "rachel@mail.com"
+              }
+      responses:
+        200:
+          description: |
+            Returns either `{}` or an array with all objects patched.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties: {}
+                    example: [
+                      {
+                        'dateofbirth': null,
+                        'firstname': "Rachel",
+                        'age': 34,
+                        'email': "rachel@mail.com"
+                      }
+                    ]
